@@ -318,10 +318,11 @@
     }
     
     // check ICY headers
-    if ([httpHeaders objectForKey:@"Icy-metaint"] != nil)
+    id metaint = [httpHeaders objectForKey:@"Icy-metaint"] ?: [httpHeaders objectForKey:@"icy-metaint"];
+    if (metaint != nil)
     {
         _metadataBytesRead  = 0;
-        _metadataStep       = [[httpHeaders objectForKey:@"Icy-metaint"] intValue];
+        _metadataStep       = [metaint intValue];
         _metadataOffset     = _metadataStep;
     }
 
